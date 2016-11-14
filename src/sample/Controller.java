@@ -10,7 +10,7 @@ public class Controller {
 
         CardApi proc = new CardApi();
 
-            ArrayList<Card> cartas = proc.doCall();
+            ArrayList<Card> cartas;
 
          for (Card temp:cartas) {
             System.out.println(temp.getName());

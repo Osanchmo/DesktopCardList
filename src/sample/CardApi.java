@@ -10,17 +10,7 @@ import java.util.ArrayList;
 
 public class CardApi {
 
-    @Nullable
-    public ArrayList<Card> doCall() {
-        try {
-            String JsonResponse = HttpUtils.get("https://api.magicthegathering.io/v1/cards?page=5&pageSize=20");
-            return getCards(JsonResponse);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
+    String urlBase = "https://api.magicthegathering.io/v1/cards?page=5&pageSize=20";
     /**
      * Recoge las cartas de una API y almacena datos en un array de objetos carta
      * con los datos que queremos guardar
@@ -31,7 +21,7 @@ public class CardApi {
         ArrayList<Card> cartas = new ArrayList<>();
 
         try {
-            JSONObject data  = new JSONObject(jsonResponse);
+            JSONObject data  = new JSONObject(HttpUtils.get(urlBase));
             JSONArray jsonCards = data.getJSONArray("cards");
 
             for (int i = 0; i < jsonCards.length(); i++) {
@@ -44,21 +34,18 @@ public class CardApi {
                 carta.setRarity(jsonCard.getString("rarity"));
                 carta.setType(jsonCard.getString("type"));
                 carta.setImage(jsonCard.getString("imageUrl"));
-                //carta.setId(jsonCard.getString("id"));
 
-                if(jsonCard.has("text")) carta.setText(jsonCard.getString("text"));
-
-                if(jsonCard.has("colors")) {
-                    String [] colors = new String[jsonCard.getJSONArray("colors").length()];
-                    for (int j = 0; j <jsonCard.getJSONArray("colors").length() ; j++) {
-                        colors[i] = jsonCard.getJSONArray("colors").get(i).toString();
-                    }
-                    carta.setColores(colors);
+                if(!jsonCard.has("text")){
+                    carta.setText("no description");
+                }else{
+                    carta.setText(jsonCard.getString("text"));
                 }
-
                 cartas.add(carta);
             }
+
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return cartas;

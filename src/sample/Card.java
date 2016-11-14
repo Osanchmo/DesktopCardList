@@ -10,25 +10,9 @@ public class Card {
     private String text = "";
     private String image = "";
     private String type = "";
-    private String id = "";
     private String rarity = "";
-    private String colores [];
 
-    public String[] getColores() {
-        return colores;
-    }
 
-    public void setColores(String[] colores) {
-        this.colores = colores;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getRarity() {
         return rarity;
