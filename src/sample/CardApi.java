@@ -6,17 +6,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class CardApi {
 
-    String urlBase = "https://api.magicthegathering.io/v1/cards?page=5&pageSize=20";
+    String urlBase = "https://api.magicthegathering.io/v1/cards";
+
     /**
      * Recoge las cartas de una API y almacena datos en un array de objetos carta
      * con los datos que queremos guardar
      * @return
      */
-    private ArrayList<Card> getCards(String jsonResponse) {
+    public ArrayList<Card> getCards() {
 
         ArrayList<Card> cartas = new ArrayList<>();
 

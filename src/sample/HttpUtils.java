@@ -8,12 +8,18 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * Created by 47989768s on 19/10/16.
+ */
+
 public class HttpUtils {
+
     public static String get(String dataUrl) throws IOException {
         URL url = new URL(dataUrl);
         String response = null;
 
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.addRequestProperty("User-Agent", "Mozilla-4.76");
         try {
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());
             response = readStream(in);
@@ -35,4 +41,5 @@ public class HttpUtils {
         rd.close();
         return response.toString();
     }
+
 }
