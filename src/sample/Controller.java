@@ -1,14 +1,17 @@
 package sample;
 
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
+
+import java.io.IOException;
 
 public class Controller {
 
@@ -24,6 +27,33 @@ public class Controller {
     Label cardText;
     @FXML
     Label cardType;
+
+    public void onClick(ActionEvent e) throws IOException {
+
+        Button tempBton;
+        MenuItem tempMenuItem;
+        String option;
+        Class clase = e.getSource().getClass();
+
+        if (clase == Button.class) {
+            tempBton = (Button) e.getSource();
+            option = tempBton.getId();
+        } else {
+            tempMenuItem = (MenuItem) e.getSource();
+            option = tempMenuItem.getId();
+        }
+        switch (option) {
+            case "quit":
+                Platform.exit();
+                break;
+            case "App":
+                Alert info = new Alert(Alert.AlertType.INFORMATION);
+                info.setContentText("Listado de cartas magic");
+                info.setTitle("info");
+                info.setHeaderText("JavaFX");
+                info.show();
+        }
+    }
 
     public void initialize() {
         llistaCartes.setCellFactory((list) -> {
