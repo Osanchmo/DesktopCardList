@@ -13,6 +13,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Magic The Gathering");
         primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.getScene().getStylesheets().add("style.css");
         primaryStage.show();
     }
 
